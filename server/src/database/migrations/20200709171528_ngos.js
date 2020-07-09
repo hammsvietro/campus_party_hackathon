@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('establishments', table => {
+  return knex.schema.createTable('ngos', table => {
     table.increments().primary();
     table.string('name').notNullable();
     table.string('cnpj').notNullable().unique();
@@ -11,16 +11,11 @@ exports.up = function(knex) {
     table.string('logo_thumbnail');
     table.string('street');
     table.string('number');
-    table.string('latitude');
-    table.string('longitude');
     table.string('state');
     table.string('city');
-    table.integer('available_meals');
-    table.time('time_available');
-    table.boolean('hasMeal').notNullable().defaultTo(false);
-  })
+  });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('establishments');
+  return knex.schema.dropTable('ngos');
 };
