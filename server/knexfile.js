@@ -1,6 +1,7 @@
 const knex = require('knex');
 const dotenv = require('dotenv');
 
+
 dotenv.config();
 
 module.exports = {
