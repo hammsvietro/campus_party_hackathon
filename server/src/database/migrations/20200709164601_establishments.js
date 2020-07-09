@@ -15,6 +15,7 @@ exports.up = function(knex) {
     table.string('city');
     table.integer('available_meals');
     table.time('time_available');
+    table.boolean('hasMeal').notNullable().defaultTo(false);
   })
 };
 
