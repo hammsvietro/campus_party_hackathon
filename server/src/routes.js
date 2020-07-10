@@ -16,11 +16,12 @@ routes.post('/ngo', upload.single('logo'), createThumbnail, ngoController.store)
 
 routes.get('/ngo/index', ngoController.index);
 
-routes.get('/ngo/:id', ngoController.getNgo);
+routes.get('/ngo/:id', ngoController.get);
+
 routes.put('/ngo/:id/name', ngoController.updateName);
 routes.put('/ngo/:id/email', ngoController.updateEmail);
 routes.put('/ngo/:id/phone', ngoController.updatePhone);
-routes.put('/ngo/:id/password', ngoController.updatePassword);
+// routes.put('/ngo/:id/password', ngoController.updatePassword);
 routes.put('/ngo/:id/street', ngoController.updateStreet);
 routes.put('/ngo/:id/number', ngoController.updateNumber);
 routes.put('/ngo/:id/state', ngoController.updateState);

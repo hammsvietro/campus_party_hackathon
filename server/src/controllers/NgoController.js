@@ -48,8 +48,6 @@ module.exports = {
         try{
             const ngos = await knex('ngos').select('*');
 
-            console.log('get /ngos/index')
-
             return res.json(ngos);
         } catch (error) {
             console.log(error);
@@ -58,8 +56,21 @@ module.exports = {
         
     },
 
+    async get(req, res) {
+        const { id } = req.params;
+
+        try{
+            const ngo = await knex('ngos').select('*').where('id', id);
+
+            return res.json(ngo);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ error: 'an error happened while searching the ngo'});
+        }
+    },
+
     async updateName(req, res) {
-        const { newName } = req.body;
+        const { name } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -73,7 +84,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              name: { newName }
+              name
             });
           } catch (error) {
             
@@ -87,7 +98,7 @@ module.exports = {
     },
     
     async updateEmail(req, res) {
-        const { newEmail } = req.body;
+        const { email } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -101,7 +112,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              email: { newEmail }
+              email
             });
           } catch (error) {
             
@@ -115,7 +126,7 @@ module.exports = {
     },
 
     async updatePhone(req, res) {
-        const { newPhone } = req.body;
+        const { phone_number } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -129,7 +140,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              phone_number: { newPhone }
+              phone_number
             });
           } catch (error) {
             
@@ -142,38 +153,43 @@ module.exports = {
           return res.status(200).send({ success: 'success' });
     },
 
-    async updatePassword(req, res) {
-        const { newPassword } = req.body;
-        const { id } = req.params;
-
-        const trx = await knex.transaction();
-
-        const ngo = await trx('ngos').where({ id }).first();
-
-        if(!ngo) {
-            await trx.rollback();
-            return res.status(404).send({ error: 'this ngo does not exist' });
-        }
-
-        try {
-            await trx('ngos').where({ id }).update({
-              password: { password }
-            });
-          } catch (error) {
-            
-            console.log(error);
-            await trx.rollback();
-            return res.status(503).send({ error: 'couldn\'t change password' });
-      
-          }
-          await trx.commit();
-          return res.status(200).send({ success: 'success' });
-    },
+    /* This is currently turned off because of safety reasons; when we have
+     * proper e-mail authentication support it can be turned on
+     * 
+     * async updatePassword(req, res) {
+     *     const { password } = req.body;
+     *     const { id } = req.params;
+     *
+     *     const trx = await knex.transaction();
+     *
+     *     const ngo = await trx('ngos').where({ id }).first();
+     *
+     *     if(!ngo) {
+     *         await trx.rollback();
+     *         return res.status(404).send({ error: 'this ngo does not exist' });
+     *     }
+     *
+     *     try {
+     *         await trx('ngos').where({ id }).update({
+     *           password
+     *         });
+     *       } catch (error) {
+     *      
+     *         console.log(error);
+     *         await trx.rollback();
+     *         return res.status(503).send({ error: 'couldn\'t change password' });
+     *
+     *       }
+     *       await trx.commit();
+     *       return res.status(200).send({ success: 'success' });
+     * },
+     *
+     */
 
     // ToDo update logo
 
     async updateStreet(req, res) {
-        const { newStreet } = req.body;
+        const { street } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -187,7 +203,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              street: { newStreet }
+              street
             });
           } catch (error) {
             
@@ -201,7 +217,7 @@ module.exports = {
     },
 
     async updateNumber(req, res) {
-        const { newNumber } = req.body;
+        const { number } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -215,7 +231,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              number: { newNumber }
+              number
             });
           } catch (error) {
             
@@ -229,7 +245,7 @@ module.exports = {
     },
 
     async updateState(req, res) {
-        const { newState } = req.body;
+        const { state } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -243,7 +259,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              state: { newState }
+              state
             });
           } catch (error) {
             
@@ -257,7 +273,7 @@ module.exports = {
     },
 
     async updateCity(req, res) {
-        const { newCity } = req.body;
+        const { city } = req.body;
         const { id } = req.params;
 
         const trx = await knex.transaction();
@@ -271,7 +287,7 @@ module.exports = {
 
         try {
             await trx('ngos').where({ id }).update({
-              city: { newCity }
+              city
             });
           } catch (error) {
             
@@ -282,14 +298,6 @@ module.exports = {
           }
           await trx.commit();
           return res.status(200).send({ success: 'success' });
-    },
-
-    async getNgo(req, res) {
-        const { id } = req.params;
-
-        const ngo = await knex('ngos').select('*').where('id', id);
-
-        return res.json(ngo);
     }
 
 }
