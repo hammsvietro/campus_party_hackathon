@@ -22,6 +22,12 @@ module.exports = {
 
      if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: 'an error occoured uploading the photos' });
 
+     // check if the ngo isnt already registered as an establishment
+     // ToDo change the status code to something more semantic
+     if (await knex('ngos').select('*').where('cnpj', cnpj).first()) {
+       return res.status(403).send({ error: "already registered as an ngo!"})
+     }
+
      const hashedPassword = bcrypt.hashSync(password, 8);
 
      try {
