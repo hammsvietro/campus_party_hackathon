@@ -1,0 +1,25 @@
+.como-usar {
+
+
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  text-align: justify;
+  justify-content: space-around;
+  align-items: center;
+  margin: 100px 30px 30px;
+}
+
+.como-usar h2 {
+  font-family: 'Inter';
+  font-size: 38px;
+}
+
+.como-usar .section {
+  font-family: 'Inter';
+  font-weight: 200;
+  display: inline-block;
+  width: 80vw;
+  max-width: 1200px;
+  word-wrap: break-word;
+}

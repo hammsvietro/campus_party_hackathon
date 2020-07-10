@@ -1,6 +1,8 @@
 .map .leaflet-container {
-  width: 100vw;
-  height: 93vh;
+  width: 70vw;
+  height: 70vh;
+  max-width: 10000px;
+  max-height: 10000px;
 }
 
 .map .popup {
