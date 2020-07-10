@@ -4,7 +4,18 @@
 }
 
 .map .popup {
-  width: 150px;
+  width: 200px;
+}
+
+.map .popup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.map .popup-container img {
+  border-radius: 10px;
 }
 
 .map .stablishment-logo {

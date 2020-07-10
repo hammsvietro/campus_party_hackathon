@@ -4,12 +4,13 @@
   height: 7vh;
 }
 .dashboard .navbar {
-  background-color: #121212;
+  background-color: #1E1E1E ;
 }
 
 
 .dashboard .brand {
   color: white;
+  margin-left: 10px;
 }
 
 .dashboard .hash-links {
@@ -22,11 +23,10 @@
 
 
 .dashboard .navbar .logo {
-  width: 80px;
+  width: 60px;
   color: white;
   margin: 0;
   padding: 0;
-  background-color: blueviolet;
 }
 
 .dashboard .navbar .login {

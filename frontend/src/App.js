@@ -1,10 +1,15 @@
 import React from 'react';
+import { Route, BrowserRouter } from 'react-router-dom';
+
 import Dashboard from './pages/Dashboard';
-import './App.css';
+import Register from './pages/Register';
 
 function App() {
   return (
-   <Dashboard />
+    <BrowserRouter>
+      <Route component={Dashboard} path="/" exact />
+      <Route component={Register} path="/register" /> 
+    </BrowserRouter>
   );
 }
 
