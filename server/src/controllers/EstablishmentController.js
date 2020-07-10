@@ -17,7 +17,8 @@ module.exports = {
       latitude,
       longitude,
       state,
-      city
+      city,
+      establishmentType
      } = req.body;
 
      if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: 'an error occoured uploading the photos' });
@@ -45,6 +46,7 @@ module.exports = {
         city,
         logo: req.file.filename,
         logo_thumbnail: res.locals.thumbnailName,
+        establishmentType
        });
      } catch (error) {
 
