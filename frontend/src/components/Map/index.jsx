@@ -115,7 +115,7 @@ const stablishmentInfo = {
   street: 'rua dos polvos',
   number: 142,
   cnpj: '232.323.3223/013-2',
-  until: '18:30',
+  time_available: '18:30',
   phone_number: '(48) 9969196942',
   email: 'ovo@gmail.com',
   uf: 'SC',

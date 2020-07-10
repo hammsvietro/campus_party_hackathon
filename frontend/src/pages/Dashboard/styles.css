@@ -43,3 +43,26 @@
   align-items: center;
   justify-content: center;
 }
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 200px;
+}
+
+.login-body input{
+  outline: none;
+  border-style: double;
+  height: 32px;
+  border-radius: 8px;
+  
+}
+
+.login-body .login-buttons {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}

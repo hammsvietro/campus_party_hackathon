@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const TopWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
 `;
 
 export const Logo = styled.img`
@@ -35,12 +36,16 @@ export const Info = styled.div`
 
   > strong {
     color: #121212;
-    font-size: 13px;
-    display: block
+    font-size: 16px;
+    font-family: 'Inter';
+    font-weight: 200;
+    
   }
 
   > span {
-    color: #d3d3d3;
+    
+    font-family: 'Inter';
+    font-weight: 400;
     margin-left: 5px;
   }
 
