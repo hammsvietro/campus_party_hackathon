@@ -5,10 +5,10 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 import SearchComponent from '../MapSearch';
+import ModalBody from '../ModalBody';
 
 import './styles.css';
 import logo from '../../assets/logo.png';
-import ovo from '../../assets/ovo.jpeg';
 
 const position = [51.505, -0.09];
 
@@ -63,20 +63,7 @@ const MapComponent = () => {
             </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-              <div className="modal-body">
-                
-                <img className="img-fluid modal-logo" src={ovo} alt="logo" />
-                <div className="modal-info">
-
-                <p><h2>Endereço: </h2>{stablishmentInfo.street+' '+stablishmentInfo.number}</p>
-
-                <p><h2>Telefone: </h2>{stablishmentInfo.phone}</p>
-
-                <p><h2>E-mail: </h2>{stablishmentInfo.email}</p>
-                  
-                </div>
-                
-              </div>
+              <ModalBody data={stablishmentInfo}/>
             </Modal.Body>
 
         </Modal>
@@ -125,9 +112,10 @@ const stablishmentInfo = {
   availableMeals: 32,
   street: 'rua dos polvos',
   number: 142,
-  cpnj: '232.323.3223/013-2',
+  cnpj: '232.323.3223/013-2',
   until: '18:30',
-  phone: '(48) 9969196942',
+  phone_number: '(48) 9969196942',
   email: 'ovo@gmail.com',
-
+  uf: 'SC',
+  city:'fpolis'
 }
