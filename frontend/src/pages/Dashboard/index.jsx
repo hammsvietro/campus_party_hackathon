@@ -11,17 +11,23 @@ import logo from '../../assets/logo.png'
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <Navbar bg="dark" variant="dark">
+      <Navbar className="navbar" variant="dark">
         <img src={logo} alt="logo" className="logo" />
         <Navbar.Brand className="brand">NUTRE</Navbar.Brand>
 
         <Nav className="mr-auto hash-links">
           <Nav.Link>Mapa</Nav.Link>
-          <Nav.Link>Quem somos</Nav.Link>
           <Nav.Link>Sobre</Nav.Link>
+          <Nav.Link>Quem somos</Nav.Link>
         </Nav>
-        <Button>Registrar</Button>
-        <Button className="login">Login</Button>
+        <Nav className="justify-content-end">
+          <Nav.Item>
+            <Button variant="info" >Registrar</Button>
+          </Nav.Item>
+          <Nav.Item>
+            <Button variant="info" className="login">Login</Button>
+          </Nav.Item>
+        </Nav>
       </Navbar>
 
       <Map />
