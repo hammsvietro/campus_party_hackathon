@@ -4,6 +4,7 @@ const multer = require('multer');
 const establishmentController = require('./controllers/EstablishmentController');
 const ngoController = require('./controllers/NgoController');
 const sessionController = require('./controllers/SessionController.js');
+const dashboardController = require('./controllers/DashboardController');
 
 const checkToken = require('./middlewares/checkToken');
 
@@ -13,6 +14,7 @@ const createThumbnail = require('./middlewares/CreateThumbnail');
 const upload = multer(multerConfig)
 const routes = Router();
 
+routes.get('/dashboard', dashboardController.show);
 
 routes.post('/ngo', upload.single('logo'), createThumbnail, ngoController.store);
 

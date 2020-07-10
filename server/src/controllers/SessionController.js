@@ -2,6 +2,7 @@ const knex = require('../database/connection');
 
 const comparePasswords = require('../utils/comparePassword');
 const generateToken = require('../utils/generateToken');
+const serailizeEntity = require('../utils/serializeEntity');
 
 module.exports = {
     async login(req, res) {
@@ -22,8 +23,10 @@ module.exports = {
         
         entity.password = undefined;
 
+        entity = serailizeEntity(entity, isEstablishment);
+
         const token = generateToken({ id: entity.id, email: entity.email });
 
-        return res.status(200).send({ entity, isEstablishment, token });
+        return res.status(200).send({ entity, token });
     }
 }
