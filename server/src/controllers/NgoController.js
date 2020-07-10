@@ -58,15 +58,236 @@ module.exports = {
         
     },
 
-    async update(req, res) {
-        // req.body;
-        console.log(req.body);
+    async updateName(req, res) {
+        const { newName } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              name: { newName }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change name' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+    
+    async updateEmail(req, res) {
+        const { newEmail } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              email: { newEmail }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change email' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    async updatePhone(req, res) {
+        const { newPhone } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              phone_number: { newPhone }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change phone number' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    async updatePassword(req, res) {
+        const { newPassword } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              password: { password }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change password' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    // ToDo update logo
+
+    async updateStreet(req, res) {
+        const { newStreet } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              street: { newStreet }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change street number' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    async updateNumber(req, res) {
+        const { newNumber } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              number: { newNumber }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change number number' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    async updateState(req, res) {
+        const { newState } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              state: { newState }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change state' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
+    },
+
+    async updateCity(req, res) {
+        const { newCity } = req.body;
+        const { id } = req.params;
+
+        const trx = await knex.transaction();
+
+        const ngo = await trx('ngos').where({ id }).first();
+
+        if(!ngo) {
+            await trx.rollback();
+            return res.status(404).send({ error: 'this ngo does not exist' });
+        }
+
+        try {
+            await trx('ngos').where({ id }).update({
+              city: { newCity }
+            });
+          } catch (error) {
+            
+            console.log(error);
+            await trx.rollback();
+            return res.status(503).send({ error: 'couldn\'t change city number' });
+      
+          }
+          await trx.commit();
+          return res.status(200).send({ success: 'success' });
     },
 
     async getNgo(req, res) {
         const { id } = req.params;
 
-        ngo = await knex('ngos').select('*').where('id', id);
+        const ngo = await knex('ngos').select('*').where('id', id);
 
         return res.json(ngo);
     }
