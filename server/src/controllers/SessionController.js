@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 
 const knex = require('../database/connection');
-const { json } = require('express');
 
 module.exports = {
     async login(req, res) {

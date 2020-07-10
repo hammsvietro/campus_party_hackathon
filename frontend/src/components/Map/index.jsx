@@ -42,15 +42,17 @@ const MapComponent = () => {
 
               <Marker position={[store.latitude, store.longitude]}>
                 <Popup className="popup">
+                  <div className="popup-container">
+                    <img class="stablishment-logo" src={logo} alt="jsaidj"/>
 
-                  <img class="stablishment-logo" src={logo} alt="jsaidj"/>
+                    <p>{store.name}</p>
+                    <p>{store.availableMeals + ' Refeições disponíveis'}</p>
 
-                  <p>{store.name}</p>
-                  <p>{store.availableMeals + ' Refeições disponíveis'}</p>
+                    <Button className="see-more-button" variant="info" onClick={handleOpenModal}>
+                      Mais Informações
+                    </Button>
 
-                  <Button className="see-more-button" variant="info" onClick={handleOpenModal}>
-                    Mais Informações
-                  </Button>
+                  </div>
 
                 </Popup>
               </Marker>
