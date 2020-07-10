@@ -1,4 +1,5 @@
 const knex = require('../database/connection');
+const bcrypt = require('bcrypt');
 
 const deleteFiles = require('../utils/deleteFiles');
 
@@ -21,13 +22,15 @@ module.exports = {
 
      if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: 'an error occoured uploading the photos' });
 
+     const hashedPassword = bcrypt.hashSync(password, 8);
+
      try {
        await knex('establishments').insert({
         name,
         cnpj,
         email,
         phone_number: phone,
-        password,
+        password: hashedPassword,
         street,
         number,
         latitude,
@@ -47,6 +50,18 @@ module.exports = {
      return res.status(200).send({ success: 'success' });
 
   },
+
+  async index(req, res) {
+    try{
+        const establishments = await knex('establishments').select('*');
+
+        return res.json(establishments);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ error: 'something really weird happened'});
+    }
+    
+},
 
   async addMeal(req, res) {
     const { id } = req.params;

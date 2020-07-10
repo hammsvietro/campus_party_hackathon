@@ -3,6 +3,7 @@ const multer = require('multer');
 
 const establishmentController = require('./controllers/EstablishmentController');
 const ngoController = require('./controllers/NgoController');
+const sessionController = require('./controllers/SessionController.js');
 
 const multerConfig = require('./config/multer');
 const createThumbnail = require('./middlewares/CreateThumbnail');
@@ -27,9 +28,12 @@ routes.put('/ngo/:id/number', ngoController.updateNumber);
 routes.put('/ngo/:id/state', ngoController.updateState);
 routes.put('/ngo/:id/city', ngoController.updateCity);
 
+routes.put('/session/login', sessionController.login);
+
 
 routes.post('/establishment', upload.single('logo'), createThumbnail, establishmentController.store);
 
 routes.put('/establishment/:id', establishmentController.addMeal);
+routes.get('/establishment/index', establishmentController.index);
 
 module.exports = routes;

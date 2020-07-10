@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const knex = require('../database/connection');
 
 const deleteFiles = require('../utils/deleteFiles');
@@ -21,13 +23,15 @@ module.exports = {
 
         if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: "an error ocurred uploading the photos" });
 
+        const hashedPassword = bcrypt.hashSync(password, 8);
+
         try {
             await knex('ngos').insert({
                 name,
                 cnpj,
                 email,
                 phone_number,
-                password,
+                password: hashedPassword,
                 logo: req.file.filename,
                 logo_thumbnail: res.locals.thumbnailName,
                 street,
@@ -61,7 +65,6 @@ module.exports = {
 
         try{
             const ngo = await knex('ngos').select('*').where('id', id);
-
             return res.json(ngo);
         } catch (error) {
             console.log(error);
