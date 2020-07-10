@@ -74,6 +74,8 @@ module.exports = {
       return res.status(503).send({ error: 'could\'t add meal' });
 
     }
+
+    await trx.commit();
     return res.status(200).send({ success: 'success' });
   }
 }
