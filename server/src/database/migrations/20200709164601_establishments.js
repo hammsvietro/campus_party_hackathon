@@ -18,7 +18,7 @@ exports.up = function(knex) {
     table.integer('available_meals').notNullable().defaultTo(0);
     table.time('time_available');
     table.boolean('has_meal').notNullable().defaultTo(false);
-  })
+  });
 };
 
 exports.down = function(knex) {

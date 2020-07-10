@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const knex = require('../database/connection');
 
@@ -13,8 +13,8 @@ module.exports = {
             email,
             phone_number,
             password,
-            logo,
-            logo_thumbnail,
+            latitude,
+            longitude,
             street,
             number,
             state,
@@ -42,6 +42,8 @@ module.exports = {
                 logo: req.file.filename,
                 logo_thumbnail: res.locals.thumbnailName,
                 street,
+                latitude,
+                longitude,
                 number,
                 state,
                 city

@@ -1,37 +1,29 @@
-const bcrypt = require('bcrypt');
-
 const knex = require('../database/connection');
+
+const comparePasswords = require('../utils/comparePassword');
+const generateToken = require('../utils/generateToken');
 
 module.exports = {
     async login(req, res) {
-        const { cnpj, password } = req.body;
+        const { email, password } = req.body;
+        
+        let entity;
+        let isEstablishment = true;
 
-        try{
-            // try login in as ngo, if it doesnt work then try as establishment
-            const ngo = await knex('ngos').select('*').where('cnpj', cnpj).first();
-            
-            if (ngo) {
-                if (await bcrypt.compare(password, ngo.password)) {
-                    const isEstablishment = false;
-
-                    return res.json({ ngo, isEstablishment: false });
-                }
-            }
-
-            const establishment = await knex('establishments').select('*').where('cnpj', cnpj).first();
-
-            if (establishment) {
-                if (await bcrypt.compare(password, establishment.password)) {
-                    const isEstablishment = true;
-
-                    return res.json({ establishment, isEstablishment: true });
-                }
-            }
-
-            res.status(401).send({ error: "login failed"});
-        } catch(error) {
-            console.log(error);
-            res.status(500).send({ error: 'an error happened while validating the login'});
+        
+        entity = await knex('establishments').where({email}).first();
+        if(!entity) {
+            isEstablishment = false;
+            entity = await knex('ngos').where({email}).first();
         }
+        if(!entity) return res.status(404).send({ error: 'wrong password / email' });
+        
+        if(!comparePasswords(entity.password, password)) return res.status(404).send({ error: 'wrong password / email' });
+        
+        entity.password = undefined;
+
+        const token = generateToken({ id: entity.id, email: entity.email });
+
+        return res.status(200).send({ entity, isEstablishment, token });
     }
 }

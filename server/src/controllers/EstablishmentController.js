@@ -1,5 +1,5 @@
 const knex = require('../database/connection');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const deleteFiles = require('../utils/deleteFiles');
 
@@ -88,7 +88,7 @@ module.exports = {
       await trx('establishments').where({ id }).update({
         available_meals: mealQuantity,
         time_available: timeAvailable,
-        hasMeal: true
+        has_meal: true
       });
     } catch (error) {
       
