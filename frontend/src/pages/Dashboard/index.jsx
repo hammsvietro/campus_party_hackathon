@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Navbar, Nav, Button } from 'react-bootstrap'
 
@@ -9,6 +10,14 @@ import logo from '../../assets/logo.png'
 
 
 const Dashboard = () => {
+
+  const history = useHistory();
+
+  function goToRegister(e) {
+    e.preventDefault();
+    history.push('/register');
+  }
+
   return (
     <div className="dashboard">
       <Navbar className="navbar" variant="dark">
@@ -22,7 +31,7 @@ const Dashboard = () => {
         </Nav>
         <Nav className="justify-content-end">
           <Nav.Item>
-            <Button variant="info" >Registrar</Button>
+            <Button variant="info" onClick={goToRegister}>Registrar</Button>
           </Nav.Item>
           <Nav.Item>
             <Button variant="info" className="login">Login</Button>
