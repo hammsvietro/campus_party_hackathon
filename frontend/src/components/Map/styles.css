@@ -1,0 +1,33 @@
+.map .leaflet-container {
+  width: 100vw;
+  height: 93vh;
+}
+
+.map .popup {
+  width: 150px;
+}
+
+.map .stablishment-logo {
+  width: 100px;
+  background-color: black;
+}
+
+.map .see-more-button {
+  font-size: 12px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.modal-logo {
+  height: 150px;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+
+}

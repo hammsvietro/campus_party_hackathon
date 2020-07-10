@@ -1,0 +1,30 @@
+.dashboard .navbar {
+  background-color: black;
+  color: white;
+  height: 7vh;
+}
+
+.dashboard .brand {
+  color: white;
+}
+
+.dashboard .hash-links {
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  max-width: 80vw;
+
+}
+
+
+.dashboard .navbar .logo {
+  width: 80px;
+  color: white;
+  margin: 0;
+  padding: 0;
+  background-color: blueviolet;
+}
+
+.dashboard .navbar .login {
+  margin-left: 8px;
+}
