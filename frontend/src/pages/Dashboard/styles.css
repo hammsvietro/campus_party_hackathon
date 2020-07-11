@@ -71,18 +71,28 @@
   align-items: center;
   justify-content: space-between;
   
-  max-width: 400px;
+  max-width: 500px;
   width: 33vw;
 }
 
 .dashboard .entity-info {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 }
 
 .dashboard .entity-info span {
+  display: inline-block;
   margin-left: 12px;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  max-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 
 .login-body .login-buttons {
   display: flex;

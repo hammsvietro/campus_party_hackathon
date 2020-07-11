@@ -12,6 +12,12 @@ export const AuthProvider = ({ children }) => {
   const [isEstablishment, setIsEstablishment] = useState(false);
   const [hasFood, setHasFood] = useState(false);
 
+  const updateHasFood = (hasFoodState) => {
+    console.log(`setting hasFood state to ${hasFoodState}`);
+    setHasFood(hasFoodState);
+    localStorage.setItem('hasFood', hasFoodState);
+  }
+
   const signIn = async (email, password) => {
     console.log(email, password);
     let response;
@@ -21,12 +27,12 @@ export const AuthProvider = ({ children }) => {
         setEntity(response.data.entity);
         setToken(response.data.token);
         setIsEstablishment(response.data.entity.isEstablishment);
-        setHasFood(response.data.entity.has_meal === 0 ? false : true);
+        setHasFood(response.data.entity.has_meal === 1 ? 'true' : 'false');
         api.defaults.headers.authorization = `Bearer ${response.data.token}`;
         localStorage.setItem('entity', JSON.stringify(response.data.entity));
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('isEstablishment', response.data.entity.isEstablishment);
-        localStorage.setItem('hasFood', response.data.entity.has_meal === 0 ? false : true);
+        localStorage.setItem('hasFood', response.data.entity.has_meal === 1 ? 'true' : 'false');
 
 
     } catch (err) {
@@ -47,15 +53,30 @@ export const AuthProvider = ({ children }) => {
   const checkLocalStorage = () => {
     let checkEntity = localStorage.getItem('entity');
     const checkToken = localStorage.getItem('token');
-    const checkIsStablishment = localStorage.getItem('isEstablishment');
+    const checkIsEstablishment = localStorage.getItem('isEstablishment');
+    let checkHasFood;
     
-    if (!checkEntity || !checkToken || !checkIsStablishment) return setEntity({});
     
+
+    if (!checkEntity || !checkToken || checkIsEstablishment === null || checkIsEstablishment === undefined) {
+      return setEntity({});
+    }
+    
+    
+    if(checkIsEstablishment) {
+      
+      checkHasFood = localStorage.getItem('hasFood');
+      
+      if(checkHasFood) {
+        setHasFood(checkHasFood);
+      }
+    }
+
     checkEntity = JSON.parse(checkEntity);
     
     setEntity(checkEntity);
     setToken(checkToken);
-    setIsEstablishment(checkIsStablishment);
+    setIsEstablishment(checkIsEstablishment);
     api.defaults.headers.authorization = `Bearer ${checkToken}`;
     
     return Boolean(entity);
@@ -67,7 +88,7 @@ export const AuthProvider = ({ children }) => {
   
   return (
     
-    <AuthContext.Provider value={{ entity, token, setHasFood, isSigned: Object.keys(entity).length !== 0, signIn, signOut, checkLocalStorage, isEstablishment, hasFood }}>
+    <AuthContext.Provider value={{ entity, token, setHasFood: updateHasFood, isSigned: Object.keys(entity).length !== 0, signIn, signOut, checkLocalStorage, isEstablishment, hasFood }}>
       {children}
     </AuthContext.Provider>
   );

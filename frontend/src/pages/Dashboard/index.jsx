@@ -57,7 +57,7 @@ const Dashboard = () => {
     }
 
     setShowAddMealModal(false);
-    setHasFood(false);
+    setHasFood('false');
   }
 
   async function handleSubmitMeal() {
@@ -83,7 +83,7 @@ const Dashboard = () => {
       return setShowAddMealModal(false);
     }
     setShowAddMealModal(false);
-    setHasFood(true);
+    setHasFood('true');
   }
 
   function handleCloseModal() {
@@ -140,7 +140,7 @@ const Dashboard = () => {
                 isEstablishment ?
                   (
                     <>
-                      <Button onClick={handleOpenAddMealModal} variant="info">{hasFood ? 'alterar dados doação' : 'Divulgar doação'}</Button>
+                      <Button onClick={handleOpenAddMealModal} variant="info">{hasFood==='true' ? 'alterar dados doação' : 'Divulgar doação'}</Button>
                     </>
                   )
                 :
