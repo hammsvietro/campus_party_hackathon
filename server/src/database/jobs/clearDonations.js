@@ -12,7 +12,6 @@ async function clearDonations() {
     const now = moment(new Date());
     const establishmentDate = moment(establishment.time_available, 'HH:mm');
     if(moment(now).isAfter(establishmentDate)) {
-      console.log(`reseting ${establishment.name}`);
       await knex('establishments').update({
         available_meals: 0,
         has_meal: false,

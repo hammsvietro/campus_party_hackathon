@@ -18,10 +18,6 @@ module.exports = {
             entity = await knex('ngos').where({email}).first();
         }
         if(!entity) return res.status(404).send({ error: 'wrong password / email' });
-        
-        
-
-        console.log(await comparePasswords(entity.password, password));
 
         if(! await comparePasswords(entity.password, password)) return res.status(404).send({ error: 'wrong password / email' });
         
