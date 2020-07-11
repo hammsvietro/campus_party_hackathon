@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 import api from '../../services/api';
 
-const AuthContext = createContext({ entity: {}, isSigned: false, token: '', signIn: {}, signOut: {}, checkLocalStorage: {}, isEstablishment: false, hasFood: false });
+const AuthContext = createContext({ entity: {}, isSigned: false, token: '', signIn: {}, setHasFood: {}, signOut: {}, checkLocalStorage: {}, isEstablishment: false, hasFood: false });
 
 
 export const AuthProvider = ({ children }) => {
@@ -47,14 +47,15 @@ export const AuthProvider = ({ children }) => {
   const checkLocalStorage = () => {
     let checkEntity = localStorage.getItem('entity');
     const checkToken = localStorage.getItem('token');
+    const checkIsStablishment = localStorage.getItem('isEstablishment');
     
-    
-    if (!checkEntity || !checkToken) return setEntity({});
+    if (!checkEntity || !checkToken || !checkIsStablishment) return setEntity({});
     
     checkEntity = JSON.parse(checkEntity);
-
+    
     setEntity(checkEntity);
     setToken(checkToken);
+    setIsEstablishment(checkIsStablishment);
     api.defaults.headers.authorization = `Bearer ${checkToken}`;
     
     return Boolean(entity);
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }) => {
   
   return (
     
-    <AuthContext.Provider value={{ entity, token, isSigned: Object.keys(entity).length !== 0, signIn, signOut, checkLocalStorage, isEstablishment, hasFood }}>
+    <AuthContext.Provider value={{ entity, token, setHasFood, isSigned: Object.keys(entity).length !== 0, signIn, signOut, checkLocalStorage, isEstablishment, hasFood }}>
       {children}
     </AuthContext.Provider>
   );

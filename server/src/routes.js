@@ -36,7 +36,9 @@ routes.put('/session/login', sessionController.login);
 routes.post('/establishment', upload.single('logo'), createThumbnail, establishmentController.store);
 
 routes.put('/establishment/:id', checkToken, establishmentController.addMeal);
-routes.delete('/establishment/:id/meal', establishmentController.deleteMeal);
+
+routes.delete('/establishment/:id/', checkToken,establishmentController.deleteMeal);
+
 routes.get('/establishment/index', establishmentController.index);
 
 module.exports = routes;

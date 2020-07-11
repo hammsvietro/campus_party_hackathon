@@ -1,6 +1,6 @@
 .map .leaflet-container {
   width: 70vw;
-  height: 70vh;
+  height: 550px;
   max-width: 10000px;
   max-height: 10000px;
 }
@@ -17,8 +17,8 @@
   border-radius: 10px;
 }
 
-.map .popup-container .entity-data {
-  ;
+.logged-nav {
+  width: 400px;
 }
 
 .map .stablishment-logo {

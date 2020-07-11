@@ -28,6 +28,7 @@
 .dashboard .thumb-photo {
   max-height: 50px;
   border-radius: 8px;
+  margin-left: 8px;
 }
 
 
@@ -70,7 +71,7 @@
   align-items: center;
   justify-content: space-between;
   
-  max-width: 300px;
+  max-width: 400px;
   width: 33vw;
 }
 
@@ -88,4 +89,47 @@
   align-items: center;
   width: 100%;
   justify-content: space-around;
+}
+
+.add-meal-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  width: 80%;
+}
+
+.add-meal-modal-container .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.add-meal-modal-container .inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 140px;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.add-meal-modal-container .data {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.add-meal-modal-container .inputs input {
+  max-width: 100px;
+}
+
+.add-meal-modal-container strong {
+  margin-right: 12px;
+}
+
+
+.add-meal-modal-container input {
+  outline: none;
 }
