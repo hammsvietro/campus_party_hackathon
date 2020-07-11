@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }) => {
         console.log('200');
         setEntity(response.data.entity);
         setToken(response.data.token);
-        setIsEstablishment(!!response.data.entity.isEstablishment);
-        setHasFood(!!response.data.entity.has_meal);
+        setIsEstablishment(response.data.entity.isEstablishment);
+        setHasFood(response.data.entity.has_meal === 0 ? false : true);
         api.defaults.headers.authorization = `Bearer ${response.data.token}`;
         localStorage.setItem('entity', JSON.stringify(response.data.entity));
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('isEstablishment', !!response.data.entity.isEstablishment);
-        localStorage.setItem('hasFood', response.data.entity.has_meal);
+        localStorage.setItem('isEstablishment', response.data.entity.isEstablishment);
+        localStorage.setItem('hasFood', response.data.entity.has_meal === 0 ? false : true);
 
 
     } catch (err) {
