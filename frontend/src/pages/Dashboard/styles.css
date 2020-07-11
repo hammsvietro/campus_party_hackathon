@@ -4,7 +4,8 @@
   height: 7vh;
 }
 .dashboard .navbar {
-  background-color: #1E1E1E ;
+  background-color: #1E1E1E;
+  height: 80px;
 }
 
 
@@ -24,6 +25,10 @@
   margin-left: 5vw;
 }
 
+.dashboard .thumb-photo {
+  max-height: 50px;
+  border-radius: 8px;
+}
 
 
 .dashboard .navbar .logo {
@@ -58,6 +63,24 @@
   height: 32px;
   border-radius: 8px;
   
+}
+
+.dashboard .logged-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  max-width: 300px;
+  width: 33vw;
+}
+
+.dashboard .entity-info {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard .entity-info span {
+  margin-left: 12px;
 }
 
 .login-body .login-buttons {

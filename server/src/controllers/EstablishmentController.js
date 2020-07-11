@@ -48,7 +48,8 @@ module.exports = {
         city,
         logo: req.file.filename,
         logo_thumbnail: res.locals.thumbnailName,
-        establishmentType
+        establishmentType,
+        has_meal: false,
        });
      } catch (error) {
 

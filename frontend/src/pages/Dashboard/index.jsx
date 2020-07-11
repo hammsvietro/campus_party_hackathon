@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { FiLogOut } from 'react-icons/fi';
+
 import { Navbar, Nav, Button, Modal } from 'react-bootstrap'
 
 import ComoUsar from '../../components/ComoUsar';
@@ -16,7 +18,7 @@ import logo from '../../assets/logo.png'
 
 const Dashboard = () => {
 
-  const { signIn, signOut, entity, token, isSigned } = useAuth();
+  const { signIn, signOut, entity, token, isSigned, isEstablishment, hasFood } = useAuth();
 
   const [showModal, setShowModal] = useState(false); 
   const [username, setUsername] = useState('');
@@ -73,15 +75,37 @@ const Dashboard = () => {
           </Nav.Item></>)}
 
           {isSigned && (
-            <>
-            <Button onClick={handleSignOut}>
-              Logout
+            <div className="logged-nav"> 
+              {
+                isEstablishment ?
+                  (
+                    <>
+                      <Button variant="info">{hasFood ? 'Divulgar doação' : 'alterar dados doação'}</Button>
+                    </>
+                  )
+                :
+                  (
+                    <>
+                    <div className="div"></div>
+                    <div className="div"></div>
+                    </>
+                  )
+              }
+              
+              
+              <div className="entity-info">
+                <img className="thumb-photo" src={entity.logo_thumbnail} alt='ovo' />
+                <span>{isEstablishment}</span>
+              </div>
+            <Button variant="info" onClick={handleSignOut}>
+              <FiLogOut size={20}/>
             </Button>
-            </>
+            </div>
           )}
         </Nav>
       </Navbar>
       <div className="content">
+
         <div id="how-to-use">
 
           <ComoUsar />
