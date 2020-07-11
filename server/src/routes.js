@@ -18,7 +18,7 @@ routes.get('/dashboard', dashboardController.show);
 
 routes.post('/ngo', upload.single('logo'), createThumbnail, ngoController.store);
 
-routes.get('/ngo/index', ngoController.index);
+routes.get('/ngo', ngoController.index);
 
 routes.get('/ngo/:id', ngoController.get);
 
@@ -39,6 +39,6 @@ routes.put('/establishment/:id', checkToken, establishmentController.addMeal);
 
 routes.delete('/establishment/:id/', checkToken,establishmentController.deleteMeal);
 
-routes.get('/establishment/index', establishmentController.index);
+routes.get('/establishment/:id', establishmentController.index);
 
 module.exports = routes;

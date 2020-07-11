@@ -238,7 +238,7 @@ const Register = () => {
               <Dropzone fileHandler={setLogo} />
               <div className="info">
                 <strong>Informe a localização da sua entidade clicando no mapa: </strong>
-                <Map center={[ -27.59667, -48.54917 ]} zoom={5} onclick={handleMapClick} >
+                <Map center={[-15.798478, -47.860861]} zoom={12} onclick={handleMapClick} >
                   <TileLayer
                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -4,6 +4,8 @@ const knex = require('../database/connection');
 
 const deleteFiles = require('../utils/deleteFiles');
 
+const serializeEntity = require('../utils/serializeEntity');
+
 module.exports = {
 
     async store(req, res) {
@@ -66,7 +68,10 @@ module.exports = {
         const { id } = req.params;
 
         try{
-            const ngo = await knex('ngos').select('*').where('id', id);
+            let ngo = await knex('ngos').select('*').where('id', id).first();
+
+            ngo = serializeEntity(ngo, false);
+
             return res.json(ngo);
         } catch (error) {
             res.status(500).send({ error: 'an error happened while searching the ngo'});

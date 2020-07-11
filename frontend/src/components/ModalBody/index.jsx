@@ -8,7 +8,7 @@ const ModalBody = ({data}) => {
   return (
     <Container>
       <TopWrapper>
-        <Logo src={ovo} alt="logo"></Logo>
+        <Logo src={data.logo} alt="logo"></Logo>
         <InfoContainer>
           <Info>
             <strong>CNPJ:</strong>
@@ -20,21 +20,31 @@ const ModalBody = ({data}) => {
           </Info>
           <Info>
             <strong>UF:</strong>
-            <span>{data.uf}</span>
+            <span>{data.state}</span>
           </Info>
           <Info>
             <strong>Cidade:</strong>
             <span>{data.city}</span>
           </Info>
 
-          <Info>
-            <strong>Refeições:</strong>
-            <span>{data.availableMeals}</span>
-          </Info>
-          <Info>
-            <strong>Disponível para coleta até:</strong>
-            <span>{data.time_available}</span>
-          </Info>
+          {data.isEstablishment && (data.has_meal == '1' ?
+           <>
+            <Info>
+              <strong>Refeições:</strong>
+              <span>{data.available_meals}</span>
+            </Info>
+            <Info>
+              <strong>Disponível para coleta até:</strong>
+              <span>{data.time_available}</span>
+            </Info>
+          </>
+            :
+          <>
+            <Info>
+              <strong>No momento esse estabelecimento não está doando</strong>
+            </Info>
+          </>
+          )}
         </InfoContainer>
       </TopWrapper>
       

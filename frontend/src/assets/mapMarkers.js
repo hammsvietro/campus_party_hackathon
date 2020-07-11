@@ -6,15 +6,24 @@ import redMarkerPng from './red_marker.png';
 
 
 export const greenMarker = L.icon({
-  iconUrl: greenMarkerPng
+  iconUrl: greenMarkerPng,
+  iconSize: [25,41],
+  iconAnchor: [12, 41],
+  popupAnchor: [0, -40]
 })
 
 export const purpleMarker = L.icon({
-  iconUrl: purpleMarkerPng
+  iconUrl: purpleMarkerPng,
+  iconSize: [25,41],
+  iconAnchor: [12, 41],
+  popupAnchor: [0, -40]
 })
 
 export const redMarker = L.icon({
-  iconUrl: redMarkerPng
+  iconUrl: redMarkerPng,
+  iconSize: [25,41],
+  iconAnchor: [12, 41],
+  popupAnchor: [0, -40]
 })
 
 

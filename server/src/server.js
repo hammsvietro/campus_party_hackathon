@@ -24,7 +24,7 @@ if(!process.env.SV_ADDRESS || !process.env.SV_PORT) {
   return;
 }
 
-app.listen(process.env.SV_PORT, () => {
-  console.log(`listening at: ${process.env.SV_ADDRESS}:${process.env.SV_PORT}`);
-  return process.env.SV_PORT;
+app.listen(3333, () => {
+  console.log(`listening at: localhost:3333`);
+  return 'localhost';
 });

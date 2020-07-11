@@ -4,6 +4,8 @@ const moment = require('moment');
 
 const deleteFiles = require('../utils/deleteFiles');
 
+const serializeEntity = require('../utils/serializeEntity');
+
 module.exports = {
   
   async store(req, res) {
@@ -62,10 +64,13 @@ module.exports = {
   },
 
   async index(req, res) {
+    const { id } = req.params;
     try{
-        const establishments = await knex('establishments').select('*');
+        let establishment = await knex('establishments').select('*').where({ id }).first();
 
-        return res.json(establishments);
+        establishment = serializeEntity(establishment, true);
+
+        return res.json(establishment);
     } catch (error) {
         res.status(500).send({ error: 'something really weird happened'});
     }
@@ -93,7 +98,7 @@ module.exports = {
       await trx('establishments').where({ id }).update({
         available_meals: mealQuantity,
         time_available: timeAvailable,
-        has_meal: true
+        has_meal: '1'
       });
     } catch (error) {
       
@@ -112,7 +117,7 @@ module.exports = {
     try {
       await knex('establishments').update({
         available_meals: 0,
-        has_meal: false,
+        has_meal: '0',
         time_available: null
       }).where({ id });
       res.status(200).send({ success: 'success' });

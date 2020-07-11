@@ -15,13 +15,14 @@
 
 .map .popup-container img {
   border-radius: 10px;
+  margin-bottom: 12px;
 }
 
 .logged-nav {
   width: 400px;
 }
 
-.map .stablishment-logo {
+.map .establishment-logo {
   width: 100px;
   background-color: black;
 }

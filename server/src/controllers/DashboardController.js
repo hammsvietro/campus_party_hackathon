@@ -9,7 +9,10 @@ module.exports = {
 
     const ngos = serializeEntities(await knex('ngos'), false);
 
-    return res.status(200).send(establishments.concat(ngos))
+    return res.status(200).send({
+      establishments,
+      ngos
+    })
   }
 
 }

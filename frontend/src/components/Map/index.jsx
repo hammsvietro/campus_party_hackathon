@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Button, Modal } from 'react-bootstrap';
 
 import { redMarker, greenMarker, purpleMarker } from '../../assets/mapMarkers';
 
+import api from '../../services/api';
 
 import SearchComponent from '../MapSearch';
 import ModalBody from '../ModalBody';
@@ -12,26 +13,57 @@ import ModalBody from '../ModalBody';
 import './styles.css';
 import logo from '../../assets/logo_big.png';
 
-const position = [51.5103, -0.09];
+const position = [-15.798478, -47.860861];
 
 const MapComponent = () => {
   
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [establishments, setEstablishments] = useState([]);
+  const [ngos, setNgos] = useState([]);
+  const [selectedEstablishmentInfo, setSelectedEstablishmentInfo] = useState({})
 
 
-  async function handleOpenModal(e) {
+
+  async function handleOpenModal(e, id, type) {
     e.preventDefault();
+    let response;
+    try {
+      response = await api.get(`${type}/${id}`);
+    } catch (error) {
+      alert('error');
+    }
+    
+    setSelectedEstablishmentInfo(response.data);
     setShowModal(true);
   }
 
   async function handleCloseModal() {
+
     setShowModal(false);
   }
+
+  async function fetchEntities() {
+    let response;
+
+    try {
+      response = await api.get('/dashboard');
+      
+      setEstablishments(response.data.establishments);
+      setNgos(response.data.ngos);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchEntities();
+  }, []);
 
   return (
     <div className="map">
 
-      <Map center={position} zoom={13}>
+      <Map center={position} zoom={14}>
 
         <SearchComponent />
 
@@ -39,37 +71,65 @@ const MapComponent = () => {
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-          
-            {stablishments.map((store, inx) => (
 
-              <Marker icon={inx%2===0 ? greenMarker : purpleMarker} position={[store.latitude, store.longitude]}>
-                <Popup className="popup">
-                  <div className="popup-container">
-                    <img class="stablishment-logo" src={logo} alt="jsaidj"/>
-                      <span>{store.name}</span>
-                    
-                      <span style={{margin: '5px 0 0 0'}}>{store.type}</span>
-                    
-                    <p>{store.availableMeals + ' Refeições disponíveis'}</p>
+            {
+              establishments.map((establishment, inx) => (
+                <Marker
+                  key={establishment.name}
+                  icon={establishment.has_meal == '1' ? greenMarker : redMarker}
+                  position={[establishment.latitude, establishment.longitude]}
+                >
+                  <Popup className="popup">
+                    <div className="popup-container">
+                      <img class="establishment-logo" src={establishment.logo_thumbnail} alt="jsaidj"/>
+                        <span>{establishment.name}</span>
+                      
+                        <span style={{margin: '5px 0 0 0'}}>{establishment.establishmentType}</span>
+                      
+                      {establishment.hasMeal && <p>{establishment.available_meals + ' Refeições disponíveis'}</p>}
 
-                    <Button className="see-more-button" variant="info" onClick={handleOpenModal}>
-                      Mais Informações
-                    </Button>
+                      <Button className="see-more-button" variant="info" onClick={(e) => handleOpenModal(e, establishment.id, 'establishment')}>
+                        Mais Informações
+                      </Button>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))
+            }
 
-                  </div>
+            {
+              ngos.map((ngo, inx) => (
+                <Marker
+                  key={ngo.name}
+                  icon={purpleMarker}
+                  position={[ngo.latitude, ngo.longitude]}
+                >
+                  <Popup className="popup">
+                    <div className="popup-container">
+                      <img class="establishment-logo" src={ngo.logo_thumbnail} alt="jsaidj"/>
+                        <span>{ngo.name}</span>
+                      
+                        <span style={{margin: '5px 0 0 0'}}>ONG</span>
+                      
+                      
 
-                </Popup>
-              </Marker>
-            ))}
+                      <Button className="see-more-button" variant="info" onClick={(e) => handleOpenModal(e, ngo.id, 'ngo')}>
+                        Mais Informações
+                      </Button>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))
+            }
 
         <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              {stablishmentInfo.name}
+              {selectedEstablishmentInfo.name}
             </Modal.Title>
           </Modal.Header>
             <Modal.Body>
-              <ModalBody data={stablishmentInfo}/>
+              <ModalBody data={selectedEstablishmentInfo}/>
             </Modal.Body>
 
         </Modal>
@@ -81,51 +141,3 @@ const MapComponent = () => {
 }
 
 export default MapComponent;
-
-
-
-
-
-const stablishments = [
-  {
-    name: 'Supermercado Big',
-    availableMeals: 32,
-    type: 'Mercado',
-    latitude: 51.505,
-    longitude: -0.09
-  },
-  {
-    name: 'tres irmaos',
-    availableMeals: 4,
-    type: 'Mercado',
-    latitude: 51.54 ,
-    longitude: -0.09
-  },
-  {
-    name: 'braulio',
-    availableMeals: 123,
-    type: 'Mercado',
-    latitude: 51.503,
-    longitude: -0.097
-  },
-  {
-    name: 'qwdhuqhwd',
-    availableMeals: 543,
-    type: 'Mercado',
-    latitude: 51.502,
-    longitude: -0.091
-  }
-]
-
-const stablishmentInfo = {
-  name: 'Supermercado Big',
-  availableMeals: 32,
-  street: 'rua dos polvos',
-  number: 142,
-  cnpj: '232.323.3223/013-2',
-  time_available: '18:30',
-  phone_number: '(48) 9969196942',
-  email: 'ovo@gmail.com',
-  uf: 'SC',
-  city:'fpolis'
-}
