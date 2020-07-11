@@ -1,5 +1,6 @@
 const knex = require('../database/connection');
 const bcrypt = require('bcryptjs');
+const moment = require('moment');
 
 const deleteFiles = require('../utils/deleteFiles');
 
@@ -20,6 +21,7 @@ module.exports = {
       city,
       establishmentType
      } = req.body;
+
 
      if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: 'an error occoured uploading the photos' });
 
@@ -55,7 +57,7 @@ module.exports = {
       return deleteFiles([req.file.filename, res.locals.thumbnailName]);
     }
 
-     return res.status(200).send({ success: 'success' });
+    return res.status(200).send({ success: 'success' });
 
   },
 
@@ -74,6 +76,10 @@ module.exports = {
   async addMeal(req, res) {
     const { id } = req.params;
     const { mealQuantity, timeAvailable } = req.body;
+
+    if(moment(timeAvailable, 'HH:mm').isBefore(moment(new Date()))) {
+      return res.status(405).send({ error: 'need to inform a future time' });
+    }
 
     const trx = await knex.transaction();
 

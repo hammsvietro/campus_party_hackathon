@@ -19,7 +19,7 @@ export const TopWrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 300px;
+  width: 400px;
   border-radius: 8px;
 `;
 

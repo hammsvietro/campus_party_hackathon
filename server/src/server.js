@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const cors = require('cors');
 const cron = require('node-cron');
 const clearDBJob = require('./database/jobs/clearDonations');
 
@@ -9,6 +10,7 @@ const routes = require('./routes');
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(routes);
