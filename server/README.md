@@ -7,6 +7,8 @@ Após fazer o download ou clonar esse repositório, navegue até este diretório
 
 Instale as dependências do projeto com ```npm install``` ou ```yarn install```.
 
+Para configurar o banco de dados, primeiramente execute o comando ```knex migrate:latest``` se você está usando o npm ou ```yarn knex migrate:latest``` com yarn. Isso criará as tabelas no banco de dados. Para populá-las com dados de exemplo execute o comando ```knex seed:run``` ou ```yarn knex seed:run``` no yarn. 
+
 Para saber em que porta e onde está rodando o Express depende de um arquivo ```.env``` configurado manualmente. Para fazer isso, basta criar uma cópia do arquivo ```sample.env``` e completar a penúltima linha ```SV_PORT=<port>``` com o número da porta que o servidor irá ouvir. O padrão é ```3333```. Já a última linha deve ser completada com ```SV_ADDRESS=localhost``` para rodá-lo em sua máquina local.
 
 Após isso, apenas rode um ```npm start```, ```yarn start``` ou ainda execute o arquivo ```server.js``` diretamente usando o ```node```.
