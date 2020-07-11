@@ -5,6 +5,7 @@ import { Navbar, Nav, Button, Modal } from 'react-bootstrap'
 
 import ComoUsar from '../../components/ComoUsar';
 import Map from '../../components/Map';
+import Sobre from '../../components/Sobre';
 
 import './styles.css'
 import logo from '../../assets/logo.png'
@@ -43,7 +44,7 @@ const Dashboard = () => {
         <Nav className="mr-auto hash-links">
           <Nav.Link href="#how-to-use">Como Usar</Nav.Link>
           <Nav.Link href="#map">Mapa</Nav.Link>
-          <Nav.Link href="">Sobre</Nav.Link>
+          <Nav.Link href="#sobre">Sobre</Nav.Link>
           <Nav.Link href="">Quem somos</Nav.Link>
         </Nav>
         <Nav className="justify-content-end">
@@ -62,6 +63,9 @@ const Dashboard = () => {
         </div>
         <div id="map">
           <Map />
+        </div>
+        <div id="sobre">
+          <Sobre />
         </div>
 
       </div>
