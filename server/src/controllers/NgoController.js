@@ -11,7 +11,7 @@ module.exports = {
             name,
             cnpj,
             email,
-            phone_number,
+            phone,
             password,
             latitude,
             longitude,
@@ -23,11 +23,6 @@ module.exports = {
 
         if(!req.file || !res.locals.thumbnailName) return res.status(403).send({ error: "an error ocurred uploading the photos" });
 
-        // check if the ngo isnt already registered as an establishment
-        // ToDo change the status code to something more semantic
-        if (await knex('establishments').select('*').where('cnpj', cnpj).first()) {
-          return res.status(403).send({ error: "already registered as an establishment!"})
-        }
 
 
         const hashedPassword = bcrypt.hashSync(password, 8);
@@ -37,7 +32,7 @@ module.exports = {
                 name,
                 cnpj,
                 email,
-                phone_number,
+                phone_number: phone,
                 password: hashedPassword,
                 logo: req.file.filename,
                 logo_thumbnail: res.locals.thumbnailName,

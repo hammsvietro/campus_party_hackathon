@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Button, Modal } from 'react-bootstrap';
 
+import { redMarker, greenMarker, purpleMarker } from '../../assets/mapMarkers';
+
 
 import SearchComponent from '../MapSearch';
 import ModalBody from '../ModalBody';
 
 import './styles.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo_big.png';
 
-const position = [51.505, -0.09];
+const position = [51.5103, -0.09];
 
 const MapComponent = () => {
   
@@ -29,7 +31,7 @@ const MapComponent = () => {
   return (
     <div className="map">
 
-      <Map center={position} zoom={15}>
+      <Map center={position} zoom={13}>
 
         <SearchComponent />
 
@@ -38,14 +40,16 @@ const MapComponent = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           
-            {stablishments.map(store => (
+            {stablishments.map((store, inx) => (
 
-              <Marker position={[store.latitude, store.longitude]}>
+              <Marker icon={inx%2==0 ? greenMarker : purpleMarker} position={[store.latitude, store.longitude]}>
                 <Popup className="popup">
                   <div className="popup-container">
                     <img class="stablishment-logo" src={logo} alt="jsaidj"/>
-
-                    <p>{store.name}</p>
+                      <span>{store.name}</span>
+                    
+                      <span style={{margin: '5px 0 0 0'}}>{store.type}</span>
+                    
                     <p>{store.availableMeals + ' Refeições disponíveis'}</p>
 
                     <Button className="see-more-button" variant="info" onClick={handleOpenModal}>
@@ -84,33 +88,37 @@ export default MapComponent;
 
 const stablishments = [
   {
-    name: 'Imperatriz',
+    name: 'Supermercado Big',
     availableMeals: 32,
+    type: 'Mercado',
     latitude: 51.505,
     longitude: -0.09
   },
   {
     name: 'tres irmaos',
     availableMeals: 4,
+    type: 'Mercado',
     latitude: 51.54 ,
     longitude: -0.09
   },
   {
     name: 'braulio',
     availableMeals: 123,
+    type: 'Mercado',
     latitude: 51.503,
     longitude: -0.097
   },
   {
     name: 'qwdhuqhwd',
     availableMeals: 543,
+    type: 'Mercado',
     latitude: 51.502,
     longitude: -0.091
   }
 ]
 
 const stablishmentInfo = {
-  name: 'Imperatriz',
+  name: 'Supermercado Big',
   availableMeals: 32,
   street: 'rua dos polvos',
   number: 142,

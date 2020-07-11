@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi';
 import { Button, ButtonGroup, ToggleButton, DropdownButton, Dropdown } from 'react-bootstrap'
@@ -6,7 +6,9 @@ import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
 
+import api from '../../services/api';
 import './styles.css';
+
 
 import Dropzone from '../../components/FileHandler';
 
@@ -70,18 +72,60 @@ const Register = () => {
   }
 
   const handleSubmit = async () => {
-    console.log(cnpj)
-    console.log(entityType)
-    console.log(name)
-    console.log(email)
-    console.log(password)
-    console.log(selectedUf)
-    console.log(selectedCity)
-    console.log(phone)
-    console.log(street)
-    console.log(number)
-    console.log(logo)
-    console.log(position)
+
+    const route = entityType === 'ONG' ? 'ngo' : 'establishment';
+
+    if (password !== confirmPassword) {
+      alert('Senhas não conferem')
+      return;
+    }
+
+    const [latitude, longitude] = position;
+    const data = new FormData();
+
+    data.append('name', name);
+    data.append('cnpj', cnpj);
+    data.append('password', password);
+    data.append('email', email);
+    data.append('phone', phone);
+    data.append('street', street);
+    data.append('number', number);
+    data.append('latitude', latitude);
+    data.append('longitude', longitude);
+    data.append('state', selectedUf);
+    data.append('city', selectedCity);
+    data.append('logo', logo);
+    if(route==='establishment') {
+      data.append('establishmentType', entityType);
+    }
+
+    let counter = 0;
+
+    for(var pair of data.entries()) {
+      if(!!pair[1]) counter++;
+    }
+
+   if(route === 'ngo' && counter !== 12) {
+     alert('preencha todos os registros');
+     return;
+   }
+   if(route === 'establishment' && counter !== 13) {
+     alert('preencha todos os registros');
+     return;
+   }
+
+   let response;
+   try {
+     console.log('enviando apra api');
+     response = await api.post(`/${route}`, data);
+   } catch(err) {
+     console.log('deu ruim');
+     alert('algo deu errado, tente novamente mais tarde');
+     console.log(response.data);
+     return;
+   }
+
+    return history.push('/');
   }
 
 
@@ -212,6 +256,7 @@ const Register = () => {
                 <FiCheck />
                 Finalizar Cadastro
               </Button>
+              
             </div>
 
         </div>
