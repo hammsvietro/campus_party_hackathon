@@ -22,6 +22,13 @@ Para instalar as dependências do projeto navegue até a pasta `frontend` e exec
 
 Para executar o site basta rodar o comando ```npm start``` ou ```yarn start``` e o React iniciará um novo servidor rodando na porta 3000 de sua máquina, além de abrir o projeto em uma nova aba de seu navegador
 
+
+### Sugestão de usabilidade
+
+A função de Registrar e login está funcionando integralmente, você pode criar seu usuário, inserindo todas a informações, adicionando a logo e a localização de seu estabelecimento. 
+
+Após concluir o registro, você deverá voltar para a página principal, seu estabelecimento/ong estará aparecendo no mapa como esperado, você pode logar com seu usuário recém criado, e divulgar a doação de seu estabeleciemnto, assim como cancelar uma divulgação feita.
+
 ### Landing page
 Ao entrar no site a primeira coisa que pode ser notada é uma explicação sobre como usá-lo, da perspectiva do usuário final, sejam eles empresários ou responsáveis por ONGs:
 
