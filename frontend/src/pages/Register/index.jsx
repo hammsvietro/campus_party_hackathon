@@ -201,7 +201,7 @@ const Register = () => {
               <div className="info">
                 <div className="data">
                   <strong htmlFor="uf">Estado:</strong>
-                    <select name="uf" id="uf" value={selectedUf} onChange={handleSelectedUf}>
+                    <select className="location-select" name="uf" id="uf" value={selectedUf} onChange={handleSelectedUf}>
                       <option value="0">Selecione uma UF</option>
                       {ufs.map((uf) => (
                         <option key={uf} value={uf} >{uf}</option>
@@ -210,7 +210,7 @@ const Register = () => {
                 </div>
                 <div className="data">
                   <strong htmlFor="uf">Cidade:</strong>
-                    <select name="uf" id="uf" value={selectedCity} onChange={handleSelectedCity}>
+                    <select className="location-select" name="uf" id="uf" value={selectedCity} onChange={handleSelectedCity}>
                       <option value="0">Selecione uma UF</option>
                       {cities.map((city) => (
                         <option key={city} value={city} >{city}</option>
