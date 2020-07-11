@@ -7,9 +7,7 @@ Para instalar as dependências do projeto navegue até a pasta `server` e execut
 
 Para configurar o banco de dados, primeiramente execute o comando ```knex migrate:latest``` se você está usando o npm ou ```yarn knex migrate:latest``` com yarn. Isso criará as tabelas no banco de dados. Para populá-las com dados de exemplo execute o comando ```knex seed:run``` ou ```yarn knex seed:run``` no yarn. 
 
-Para saber em que porta e onde o backend deve rodar o Express depende de um arquivo ```.env``` configurado manualmente. Para fazer isso, basta criar uma cópia do arquivo ```sample.env``` e completar a penúltima linha ```SV_PORT=<port>``` com o número da porta que o servidor irá ouvir. O padrão é ```3333```. Já a última linha deve ser completada com ```SV_ADDRESS=localhost``` para rodá-lo em sua máquina local.
-
-Após isso, apenas rode um ```npm start``` ou ```yarn start``` para iniciar o servidor.
+Após isso, apenas rode um ```npm start``` ou ```yarn start``` para iniciar o servidor. O servidor HTTP irá iniciar na porta 3333.
 
 ### Arquitetura e Uso
 O servidor do Express utiliza-se das rotas definidas no arquivo ```routes.js``` para decidir para onde irá cada requisição, baseado em sua URL. Para cada uma, uma diferente função de *callback* dos controladores é invocada. São dois controladores, ```EstablishmentController.js``` e ```NgoController.js```, que se encontram na pasta ```controllers```.<br><br>
