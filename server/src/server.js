@@ -19,11 +19,6 @@ app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 cron.schedule('*/3 * * * *', clearDBJob);
 
-if(!process.env.SV_ADDRESS || !process.env.SV_PORT) {
-  console.log('Você preencehr o arquivo .env');
-  return;
-}
-
 app.listen(3333, () => {
   console.log(`listening at: localhost:3333`);
   return 'localhost';
