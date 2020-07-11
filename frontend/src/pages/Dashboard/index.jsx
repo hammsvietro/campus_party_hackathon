@@ -6,6 +6,7 @@ import { Navbar, Nav, Button, Modal } from 'react-bootstrap'
 import ComoUsar from '../../components/ComoUsar';
 import Map from '../../components/Map';
 import Sobre from '../../components/Sobre';
+import QuemSomos from '../../components/QuemSomos';
 
 import './styles.css'
 import logo from '../../assets/logo.png'
@@ -45,7 +46,7 @@ const Dashboard = () => {
           <Nav.Link href="#how-to-use">Como Usar</Nav.Link>
           <Nav.Link href="#map">Mapa</Nav.Link>
           <Nav.Link href="#sobre">Sobre</Nav.Link>
-          <Nav.Link href="">Quem somos</Nav.Link>
+          <Nav.Link href="#quem-somos">Quem somos</Nav.Link>
         </Nav>
         <Nav className="justify-content-end">
           <Nav.Item>
@@ -66,6 +67,9 @@ const Dashboard = () => {
         </div>
         <div id="sobre">
           <Sobre />
+        </div>
+        <div id="quem-somos">
+          <QuemSomos />
         </div>
 
       </div>
