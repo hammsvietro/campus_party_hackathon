@@ -44,7 +44,6 @@ module.exports = {
                 city
             });
         } catch (error) {
-            console.log(error);
             res.status(503).send({ error: 'couldn\'t create ngo'});
             return deleteFiles([req.file.filename, res.locals.thumbnailName]);
         }
@@ -58,7 +57,6 @@ module.exports = {
 
             return res.json(ngos);
         } catch (error) {
-            console.log(error);
             res.status(500).send({ error: 'something really weird happened'});
         }
         
@@ -71,7 +69,6 @@ module.exports = {
             const ngo = await knex('ngos').select('*').where('id', id);
             return res.json(ngo);
         } catch (error) {
-            console.log(error);
             res.status(500).send({ error: 'an error happened while searching the ngo'});
         }
     },
@@ -94,8 +91,6 @@ module.exports = {
               name
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change name' });
       
@@ -122,8 +117,6 @@ module.exports = {
               email
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change email' });
       
@@ -150,8 +143,6 @@ module.exports = {
               phone_number
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change phone number' });
       
@@ -213,8 +204,6 @@ module.exports = {
               street
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change street number' });
       
@@ -241,8 +230,6 @@ module.exports = {
               number
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change number number' });
       
@@ -269,8 +256,6 @@ module.exports = {
               state
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change state' });
       
@@ -297,8 +282,6 @@ module.exports = {
               city
             });
           } catch (error) {
-            
-            console.log(error);
             await trx.rollback();
             return res.status(503).send({ error: 'couldn\'t change city number' });
       

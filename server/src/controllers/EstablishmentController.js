@@ -53,7 +53,6 @@ module.exports = {
        });
      } catch (error) {
 
-      console.log(error);
       res.status(503).send({ error: 'could\'t create establishemnt' });
       return deleteFiles([req.file.filename, res.locals.thumbnailName]);
     }
@@ -68,7 +67,6 @@ module.exports = {
 
         return res.json(establishments);
     } catch (error) {
-        console.log(error);
         res.status(500).send({ error: 'something really weird happened'});
     }
     
@@ -99,7 +97,6 @@ module.exports = {
       });
     } catch (error) {
       
-      console.log(error);
       await trx.rollback();
       return res.status(503).send({ error: 'could\'t add meal' });
 
