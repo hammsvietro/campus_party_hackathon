@@ -103,5 +103,21 @@ module.exports = {
 
     await trx.commit();
     return res.status(200).send({ success: 'success' });
+  },
+
+  async deleteMeal(req, res) {
+    const { id } = req.params;
+
+    try {
+      await knex('establishments').update({
+        available_meals: 0,
+        has_meal: false,
+        time_available: null
+      }).where({ id });
+      res.status(200).send({ success: 'success' });
+    } catch(error) {
+      res.status(503).send({ error: 'couldn\'t remove meal' })
+    }
+    
   }
 }
