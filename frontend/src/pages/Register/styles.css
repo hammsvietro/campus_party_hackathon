@@ -72,14 +72,6 @@
   outline: none;
 }
 
-.register-page .location-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 8px;
-  padding: 16px 24px;
-  font-size: 16px;
-}
 
 .register-page .info {
   display: flex;
