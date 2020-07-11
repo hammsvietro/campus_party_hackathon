@@ -42,7 +42,7 @@ const MapComponent = () => {
           
             {stablishments.map((store, inx) => (
 
-              <Marker icon={inx%2==0 ? greenMarker : purpleMarker} position={[store.latitude, store.longitude]}>
+              <Marker icon={inx%2===0 ? greenMarker : purpleMarker} position={[store.latitude, store.longitude]}>
                 <Popup className="popup">
                   <div className="popup-container">
                     <img class="stablishment-logo" src={logo} alt="jsaidj"/>

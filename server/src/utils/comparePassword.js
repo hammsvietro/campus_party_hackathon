@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 
-const comparePassword = (userPassword, providedPassword) => {
-
-  return bcrypt.compare(userPassword, providedPassword); 
+const comparePassword = async (userPassword, providedPassword) => {
+  const success = await bcrypt.compare(providedPassword, userPassword)
+  return success; 
 };
 
 module.exports = comparePassword;

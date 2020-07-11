@@ -19,6 +19,11 @@ app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 cron.schedule('*/3 * * * *', clearDBJob);
 
+if(!process.env.SV_ADDRESS || !process.env.SV_PORT) {
+  console.log('Você preencehr o arquivo .env');
+  return;
+}
+
 app.listen(process.env.SV_PORT, () => {
   console.log(`listening at: ${process.env.SV_ADDRESS}:${process.env.SV_PORT}`);
   return process.env.SV_PORT;

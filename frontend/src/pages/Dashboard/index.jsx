@@ -9,15 +9,27 @@ import Sobre from '../../components/Sobre';
 import QuemSomos from '../../components/QuemSomos';
 
 import './styles.css'
+import api from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.png'
 
 
 const Dashboard = () => {
 
+  const { signIn, signOut, entity, token, isSigned } = useAuth();
+
   const [showModal, setShowModal] = useState(false); 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSignIn = () => {
+    signIn(username, password);
+    handleCloseModal();
+  }
+  
+  const handleSignOut = () => {
+    signOut();
+  }
 
   async function handleOpenModal(e) {
     e.preventDefault();
@@ -36,6 +48,10 @@ const Dashboard = () => {
     history.push('/register');
   }
 
+  useEffect(() => {
+    
+  }, [isSigned]);
+
   return (
     <div className="dashboard">
       <Navbar className="navbar" fixed="top" variant="dark">
@@ -49,12 +65,20 @@ const Dashboard = () => {
           <Nav.Link href="#quem-somos">Quem somos</Nav.Link>
         </Nav>
         <Nav className="justify-content-end">
-          <Nav.Item>
+          {!isSigned && (<><Nav.Item>
             <Button variant="info" onClick={goToRegister}>Registrar</Button>
           </Nav.Item>
           <Nav.Item>
             <Button variant="info" onClick={handleOpenModal}className="login">Login</Button>
-          </Nav.Item>
+          </Nav.Item></>)}
+
+          {isSigned && (
+            <>
+            <Button onClick={handleSignOut}>
+              Logout
+            </Button>
+            </>
+          )}
         </Nav>
       </Navbar>
       <div className="content">
@@ -85,8 +109,8 @@ const Dashboard = () => {
               <input onChange={(e) => {setUsername(e.target.value)}}type="text"/>
               <input onChange={(e) => {setPassword(e.target.value)}} type="password"/>
               <div className="login-buttons">
-                <Button variant="info">Cancelar</Button>
-                <Button variant="info">Login</Button>
+                <Button variant="info" onClick={handleCloseModal}>Cancelar</Button>
+                <Button variant="info" onClick={handleSignIn}>Login</Button>
               </div>
             </div>
           </Modal.Body>
